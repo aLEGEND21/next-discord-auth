@@ -1,9 +1,9 @@
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogDescription,
 } from "@/components/ui/dialog";
 
 interface GuildDetailsModalProps {
@@ -25,9 +25,9 @@ export function GuildDetailsModal({
           <DialogDescription>Server ID: {guild.id}</DialogDescription>
         </DialogHeader>
 
-        <div className="mt-4 max-h-[50vh] overflow-y-auto rounded-md bg-muted p-4">
+        <div className="bg-muted mt-4 max-h-[50vh] overflow-y-auto rounded-md p-4">
           <h3 className="mb-2 text-sm font-medium">Guild Data:</h3>
-          <pre className="whitespace-pre-wrap break-all text-xs">
+          <pre className="text-xs break-all whitespace-pre-wrap">
             {JSON.stringify(guild, null, 2)}
           </pre>
         </div>

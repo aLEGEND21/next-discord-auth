@@ -1,22 +1,22 @@
 "use client";
 
-import { useState } from "react";
-import { useSession } from "next-auth/react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { SessionModal } from "@/components/session-modal";
+import { Button } from "@/components/ui/button";
+import { useSession } from "next-auth/react";
 import { signIn, signOut } from "next-auth/react";
+import Link from "next/link";
+import { useState } from "react";
 
 export default function Navbar() {
   const { data: session } = useSession();
   const [isSessionModalOpen, setIsSessionModalOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur">
-      <div className="px-8 flex h-16 items-center justify-between">
+    <header className="border-border bg-background/95 sticky top-0 z-50 w-full border-b backdrop-blur">
+      <div className="flex h-16 items-center justify-between px-8">
         <div className="flex items-center gap-2">
           <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#26ba9c]">
+            <div className="bg-primary flex h-8 w-8 items-center justify-center rounded-full">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 127.14 96.36"
@@ -51,7 +51,7 @@ export default function Navbar() {
             </>
           ) : (
             <Button
-              className="bg-[#26ba9c] hover:bg-[#1fa58a]"
+              className="bg-primary hover:bg-primary/80"
               onClick={async () => {
                 await signIn("discord", { redirectTo: "/dashboard" });
               }}

@@ -1,10 +1,11 @@
-import type React from "react";
+import Navbar from "@/components/navbar";
 import type { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
-import { Inter } from "next/font/google";
-import "./globals.css";
 import { ThemeProvider } from "next-themes";
-import Navbar from "@/components/navbar";
+import { Inter } from "next/font/google";
+import type React from "react";
+
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} min-h-screen bg-background`}>
+      <body className={`${inter.className} bg-background min-h-screen`}>
         <SessionProvider>
           <ThemeProvider
             attribute="class"
