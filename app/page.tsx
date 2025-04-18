@@ -1,6 +1,6 @@
+import { signIn } from "@/auth";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { signIn } from "@/auth";
 
 export default function Home() {
   return (
@@ -29,14 +29,13 @@ export default function Home() {
       </div>
 
       <Button
-        asChild
         size="lg"
         onClick={async () => {
           "use server";
           await signIn("discord", { redirectTo: "/dashboard" });
         }}
       >
-        <Link href="/dashboard">Get Started</Link>
+        Get Started
       </Button>
     </div>
   );
