@@ -1,68 +1,12 @@
-// import { redirect } from "next/navigation";
-// import { auth, signOut } from "@/auth";
-// import { getGuilds } from "@/lib/utils";
-
-// export default async function Dashboard() {
-//   const session = await auth();
-//   if (!session?.user) {
-//     redirect("/");
-//   }
-
-//   // Load the user's guilds from the Discord API
-//   const guilds = await getGuilds(session.user.accessToken as string);
-//   if (!guilds) {
-//     redirect("/");
-//   }
-
-//   return (
-//     <div>
-//       <h1>Dashboard</h1>
-//       <p>Welcome to your dashboard!</p>
-//       <form
-//         action={async () => {
-//           "use server";
-//           await signOut({ redirectTo: "/" });
-//         }}
-//       >
-//         <button type="submit" className="p-2 bg-blue-700 rounded-lg">
-//           Sign out
-//         </button>
-//       </form>
-//       <div>
-//         <h2>User Info</h2>
-//         <pre>{JSON.stringify(session.user, null, 2)}</pre>
-//       </div>
-
-//       <div>
-//         <h2>Your Guilds</h2>
-//         <ul>
-//           {guilds.map((guild: any) => (
-//             <li key={guild.id}>
-//               <img
-//                 src={`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png`}
-//                 alt=""
-//               />
-//               {guild.name}
-//               <pre>{JSON.stringify(guild, null, 2)}</pre>
-//             </li>
-//           ))}
-//         </ul>
-//       </div>
-//     </div>
-//   );
-// }
-
 "use client";
 
-import { useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
 import { GuildCard } from "@/components/guild-card";
 import { GuildDetailsModal } from "@/components/guild-details-modal";
-import { getGuildsAction } from "./actions";
+import { useEffect, useState } from "react";
+
+import { getGuilds } from "./actions";
 
 export default function Dashboard() {
-  const { data: session } = useSession();
   const [selectedGuild, setSelectedGuild] = useState<any | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [guilds, setGuilds] = useState<any[]>([]);
@@ -73,11 +17,13 @@ export default function Dashboard() {
   };
 
   useEffect(() => {
-    const load = async () => {
-      let data = await getGuildsAction();
-      setGuilds(data);
-    };
-    load();
+    getGuilds().then((data) => {
+      if (data) {
+        setGuilds(data);
+      } else {
+        console.log("Failed to fetch guilds"); // Due to rerenders in dev this will be logged as Discord throws a Too Many Requests error
+      }
+    });
   }, []);
 
   return (

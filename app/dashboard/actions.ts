@@ -2,9 +2,8 @@
 
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
-import { getGuilds } from "@/lib/utils";
 
-export async function getGuildsAction() {
+export async function getGuilds() {
   const session = await auth();
 
   // Check if the user is authenticated
@@ -13,10 +12,16 @@ export async function getGuildsAction() {
   }
 
   // Load the user's guilds from the Discord API
-  const guilds = await getGuilds(session.user.accessToken as string);
-  if (!guilds) {
-    redirect("/");
+  const res = await fetch("https://discord.com/api/v10/users/@me/guilds", {
+    headers: {
+      Authorization: `Bearer ${session.user.accessToken}`,
+    },
+  });
+
+  // Check if the response is ok
+  if (!res.ok) {
+    return null;
   }
 
-  return guilds;
+  return await res.json();
 }
