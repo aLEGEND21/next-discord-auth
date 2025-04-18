@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NextJS + Discord OAuth Test
+
+A modern web application demonstrating Discord OAuth2 integration with Next.js and ShadCN components. This project showcases secure authentication, API usage, and a clean user interface with dark mode aesthetics and green accent colors.
+
+## Overview
+
+This application features:
+
+- Discord OAuth2 authentication flow
+- User session management
+- Display of Discord server (guild) information
+- Modern UI built with ShadCN components
+
+## Features
+
+- **Landing Page**: Clean introduction with call-to-action button
+- **Navigation Bar**: Dynamic rendering based on authentication state
+  - Login button for unauthenticated users
+  - Logout button for authenticated users
+  - Session details modal for authenticated users
+- **Dashboard**: Displays all Discord servers the user belongs to
+  - Server cards showing icon, name, and ownership status
+  - Detailed server information modal on click
+
+## Tech Stack
+
+- **Framework**: Next.js 15 with App Router
+- **Authentication**: NextAuth.js (Auth.js) v5
+- **UI Components**: ShadCN/UI
+- **Styling**: TailwindCSS with dark mode
+- **Theme**: Modern minimalist design with green accents
 
 ## Getting Started
 
-First, run the development server:
+First, set up your Discord OAuth2 application:
+
+1. Visit the [Discord Developer Portal](https://discord.com/developers/applications)
+2. Create a new application and set up OAuth2
+3. Add the redirect URI: `http://localhost:3000/api/auth/callback/discord`
+4. Copy your Client ID and Client Secret
+
+Next, configure your environment variables:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Create a .env.local file with the following:
+AUTH_SECRET="your-generated-secret"
+DISCORD_CLIENT_ID="your-client-id"
+DISCORD_CLIENT_SECRET="your-client-secret"
+NEXTAUTH_URL="http://localhost:3000"
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then, run the development server:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Open http://localhost:3000 with your browser to see the result.
