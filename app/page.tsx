@@ -19,8 +19,8 @@ export default function Home() {
         <div className="border-border bg-card rounded-lg border p-8">
           <h2 className="mb-4 text-2xl font-bold">What this demo includes:</h2>
           <ul className="text-muted-foreground list-inside list-disc space-y-2 text-left">
-            <li>Discord OAuth2 authentication flow (simulated)</li>
-            <li>View your Discord servers (guilds)</li>
+            <li>Discord OAuth2 authentication flow</li>
+            <li>View your Discord servers</li>
             <li>Inspect server details and metadata</li>
             <li>View your Discord profile information</li>
           </ul>
