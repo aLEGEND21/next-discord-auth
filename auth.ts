@@ -20,7 +20,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
     // Add the access token from the JWT token to the session
     async session({ session, token }) {
-      console.log("Access token:", token.accessToken);
       session.user.accessToken = token.accessToken as string;
       return session;
     },
